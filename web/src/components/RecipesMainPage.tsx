@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Grid, GridItem, Button, Box, Link } from "@chakra-ui/react";
+import { Flex, Grid, GridItem, Button, Box, Link, Text } from "@chakra-ui/react";
 import { IRecipe, IFilter } from "../types/types";
 import OneRecipeSummary from "./OneRecipeSummary";
 import Layout from "./Layout";
@@ -27,7 +27,7 @@ const RecipesMainPage: React.FC<IProps> = ({
     );
     const recipeCousines: string[] = Array.from(
         new Set(recipes?.map((recipe) => recipe.strArea) as string[])
-    );
+    ).slice(0,15);
     const shownRecipes =
         filters.Categories.length === 0 && filters.Cousines.length === 0
             ? recipes
@@ -60,13 +60,13 @@ const RecipesMainPage: React.FC<IProps> = ({
         if (mainPageRecipesArray.length === 0) {
             return (
                 <Box mb={5} mt={5} textAlign={"center"}>
-                    No recipes for this selection. Please try different filters.
+                    <Text fontSize={20} fontWeight={'bold'}>No recipes for this selection. Please try different filters.</Text>
                 </Box>
             );
         } else if (shownRecipes.length <= page * RECIPES_PER_PAGE) {
             return (
                 <Box mb={5} mt={5} textAlign={"center"}>
-                    No more recipes!
+                    <Text fontSize={20} fontWeight={'bold'}>No more recipes!</Text>
                 </Box>
             );
         } else {

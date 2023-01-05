@@ -60,7 +60,6 @@ const SearchBar: React.FC<IProps> = ({ recipes }) => {
             <Input
                 width={350}
                 placeholder={"Look for recipes"}
-                _placeholder={{ color: "white" }}
                 type={"text"}
                 value={searchTerm}
                 name="search"
@@ -82,7 +81,6 @@ const SearchBar: React.FC<IProps> = ({ recipes }) => {
                                 textAlign={'center'}
                                 width={350}
                                 placeholder={"Look for recipes"}
-                                _placeholder={{ color: "white" }}
                                 type={"text"}
                                 value={searchTerm}
                                 name="search"

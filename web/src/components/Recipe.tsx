@@ -11,6 +11,8 @@ import { IRecipe } from "../types/types";
 import { useParams } from "react-router-dom";
 import Layout from "./Layout";
 import IngredientTable from "./IngredientTable";
+import Favourite from "./Favourite";
+
 interface IProps {
     recipes: IRecipe[];
 }
@@ -45,12 +47,17 @@ const Recipe: React.FC<IProps> = ({ recipes }) => {
 
     return (
         <Layout>
-            <Box>
+            <Box >
                 <Heading textAlign={"center"}>{recipe.strMeal}</Heading>
             </Box>
-            <Flex mt={5} justifyContent={"center"}>
+
+            <Flex role={'group'} justifyContent={"center"}>
+            <Box mt={5} position={'relative'}>
+                <Favourite recipeId={recipe.idMeal} />
                 <Image src={recipe.strMealThumb} />
+            </Box>
             </Flex>
+            <Box mt={10}>
             <Box mt={5} fontWeight={"bold"} textAlign={"center"}>
                 <Text fontSize={30}>Ingredients</Text>
             </Box>
@@ -59,6 +66,7 @@ const Recipe: React.FC<IProps> = ({ recipes }) => {
             </Flex>
             <Box mt={5} textAlign={"center"} fontWeight={"bold"}><Text fontSize={30}>Instructions</Text></Box>
             <Flex pl={60} pr={60} pb={15} justifyContent={'center'} ><Text>{recipe.strInstructions}</Text></Flex>
+            </Box>
         </Layout>
     );
 };

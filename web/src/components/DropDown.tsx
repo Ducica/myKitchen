@@ -40,7 +40,7 @@ const DropDown: React.FC<IProps> = ({ menuList, menuName, applyFilter }) => {
                     _hover={{ bg: "beige" }}
                     aria-label="Courses"
                     fontWeight="normal"
-                    onMouseEnter={onOpen}
+                    onMouseEnter={ onOpen}
                     onMouseLeave={onClose}
                 >
                     {menuName}{" "}

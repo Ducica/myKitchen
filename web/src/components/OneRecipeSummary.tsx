@@ -10,7 +10,7 @@ interface IProps {
 const OneRecipeSummary: React.FC<IProps> = ({recipe}) => {
     return (
         <Box position={'relative'}>
-            <Favourite/>
+            <Favourite recipeId={recipe.idMeal}/>
             <Image src={recipe.strMealThumb} />
             <Text fontSize={20}   fontWeight={'bold'} align={'center'} mt={2}>{recipe.strMeal}</Text>
         </Box>
