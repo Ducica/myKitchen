@@ -1,7 +1,5 @@
 import {
     Box,
-    Flex,
-    Text,
     Table,
     Thead,
     Tbody,
@@ -13,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { IRecipe } from "../types/types";
-import { Link as RouterLink } from "react-router-dom";
 import MealScheduleItem from "./MealScheduleItem";
 
 interface ISchedule {
@@ -79,7 +76,7 @@ const MealScheduleTable: React.FC<IProps> = ({ recipes }) => {
             })
         );
     };
-     const removeFromSchedule = (meal: string, day: string) => {
+    const removeFromSchedule = (meal: string, day: string) => {
         setSchedule({ ...schedule, [meal]: { ...schedule[meal], [day]: "" } });
         localStorage.setItem(
             "schedule",
@@ -89,38 +86,38 @@ const MealScheduleTable: React.FC<IProps> = ({ recipes }) => {
             })
         );
     };
-    const clearSchedule =()=>{
+    const clearSchedule = () => {
         setSchedule({
-    Breakfast: {
-        Monday: "",
-        Tuesday: "",
-        Wednesday: "",
-        Thursday: "",
-        Friday: "",
-        Saturday: "",
-        Sunday: "",
-    },
-    Lunch: {
-        Monday: "",
-        Tuesday: "",
-        Wednesday: "",
-        Thursday: "",
-        Friday: "",
-        Saturday: "",
-        Sunday: "",
-    },
-    Dinner: {
-        Monday: "",
-        Tuesday: "",
-        Wednesday: "",
-        Thursday: "",
-        Friday: "",
-        Saturday: "",
-        Sunday: "",
-    }
-});
-        localStorage.removeItem("schedule")
-    }
+            Breakfast: {
+                Monday: "",
+                Tuesday: "",
+                Wednesday: "",
+                Thursday: "",
+                Friday: "",
+                Saturday: "",
+                Sunday: "",
+            },
+            Lunch: {
+                Monday: "",
+                Tuesday: "",
+                Wednesday: "",
+                Thursday: "",
+                Friday: "",
+                Saturday: "",
+                Sunday: "",
+            },
+            Dinner: {
+                Monday: "",
+                Tuesday: "",
+                Wednesday: "",
+                Thursday: "",
+                Friday: "",
+                Saturday: "",
+                Sunday: "",
+            },
+        });
+        localStorage.removeItem("schedule");
+    };
 
     const tableData = mealsArray.map((meal: string, index: number) => (
         <Tr minHeight={200} key={index}>
@@ -142,9 +139,9 @@ const MealScheduleTable: React.FC<IProps> = ({ recipes }) => {
     return (
         <Box mt={20}>
             <TableContainer>
-                <Table  variant="simple">
+                <Table variant="simple">
                     <Thead>
-                        <Tr >
+                        <Tr>
                             <Th>Meal</Th>
                             <Th>Monday</Th>
                             <Th>Tuesday</Th>
@@ -158,8 +155,10 @@ const MealScheduleTable: React.FC<IProps> = ({ recipes }) => {
                     <Tbody>{tableData}</Tbody>
                 </Table>
             </TableContainer>
-              <Box textAlign={"center"}>
-                <Button mt={20} onClick={()=>clearSchedule()}>Clear entire schedule</Button>
+            <Box textAlign={"center"}>
+                <Button mt={20} onClick={() => clearSchedule()}>
+                    Clear entire schedule
+                </Button>
             </Box>
         </Box>
     );

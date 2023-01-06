@@ -1,11 +1,4 @@
-import {
-    Box,
-    Flex,
-    Heading,
-    Image,
-    Text,
-
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { IRecipe } from "../types/types";
 import { useParams } from "react-router-dom";
@@ -47,25 +40,31 @@ const Recipe: React.FC<IProps> = ({ recipes }) => {
 
     return (
         <Layout>
-            <Box >
+            <Box textAlign={"right"}>
                 <Heading textAlign={"center"}>{recipe.strMeal}</Heading>
             </Box>
-
-            <Flex role={'group'} justifyContent={"center"}>
-            <Box mt={5} position={'relative'}>
-                <Favourite recipeId={recipe.idMeal} />
-                <Image src={recipe.strMealThumb} />
+            <Box position={"absolute"} right={20}>
+                <Text fontWeight={"bold"}>Tags: {recipe.strTags}</Text>
             </Box>
+            <Flex mt={10} role={"group"} justifyContent={"center"}>
+                <Box mt={5} position={"relative"}>
+                    <Favourite recipeId={recipe.idMeal} />
+                    <Image src={recipe.strMealThumb} />
+                </Box>
             </Flex>
             <Box mt={10}>
-            <Box mt={5} fontWeight={"bold"} textAlign={"center"}>
-                <Text fontSize={30}>Ingredients</Text>
-            </Box>
-            <Flex justifyContent={"center"}>
-                <IngredientTable ingredientInfo={ingredientData} />
-            </Flex>
-            <Box mt={5} textAlign={"center"} fontWeight={"bold"}><Text fontSize={30}>Instructions</Text></Box>
-            <Flex pl={60} pr={60} pb={15} justifyContent={'center'} ><Text>{recipe.strInstructions}</Text></Flex>
+                <Box mt={5} fontWeight={"bold"} textAlign={"center"}>
+                    <Text fontSize={30}>Ingredients</Text>
+                </Box>
+                <Flex justifyContent={"center"}>
+                    <IngredientTable ingredientInfo={ingredientData} />
+                </Flex>
+                <Box mt={5} textAlign={"center"} fontWeight={"bold"}>
+                    <Text fontSize={30}>Instructions</Text>
+                </Box>
+                <Flex pl={60} pr={60} pb={15} justifyContent={"center"}>
+                    <Text>{recipe.strInstructions}</Text>
+                </Flex>
             </Box>
         </Layout>
     );

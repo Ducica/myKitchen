@@ -1,8 +1,7 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import React from "react";
 import { IRecipe } from "../types/types";
 import Layout from "./Layout";
-import { Link as RouterLink } from "react-router-dom";
 import MealScheduleTable from "./MealScheduleTable";
 
 interface IProps {
@@ -25,7 +24,6 @@ const MealSchedule: React.FC<IProps> = ({ recipes }) => {
                 </Text>
             </Box>
             <MealScheduleTable recipes={recipes} />
-
         </Layout>
     );
 };

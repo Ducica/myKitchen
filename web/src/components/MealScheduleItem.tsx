@@ -1,8 +1,6 @@
 import {
     Box,
     Button,
-    Input,
-    ListItem,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -10,15 +8,13 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    Td,
-    UnorderedList,
     useDisclosure,
     Text,
     Flex,
     Tooltip,
     Link,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { IRecipe } from "../types/types";
 import { CreatableSelect } from "chakra-react-select";
 import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
@@ -42,6 +38,8 @@ const MealScheduleItem: React.FC<IProps> = ({
     removeFromSchedule,
 }) => {
     let recipe: IRecipe | undefined = undefined;
+    const initialRef = useRef(null);
+
     if (schedule[meal][day]) {
         recipe = recipes.find(
             (recipe: IRecipe) => recipe.idMeal === schedule[meal][day]
@@ -60,15 +58,14 @@ const MealScheduleItem: React.FC<IProps> = ({
         value: recipe.idMeal,
         label: recipe.strMeal,
     }));
-    const handleChange = (selectedOption) => {
+    const handleChange = (selectedOption: { value: string; label: string }) => {
         setSelected(selectedOption);
     };
-
 
     return (
         <React.Fragment>
             <Flex justifyContent={"space-between"} textAlign={"center"}>
-                <Box mr={1}>
+                <Flex mr={1}>
                     <Tooltip
                         label={
                             recipe
@@ -87,7 +84,7 @@ const MealScheduleItem: React.FC<IProps> = ({
                             <Text>choose a meal</Text>
                         )}
                     </Tooltip>
-                </Box>
+                </Flex>
                 <Box>
                     <Box>
                         <SearchIcon onClick={onOpen} />
@@ -95,13 +92,17 @@ const MealScheduleItem: React.FC<IProps> = ({
                     <Box>
                         <Tooltip label={recipe ? "remove from schedule" : ""}>
                             <SmallCloseIcon
-                                onClick={(e) => removeFromSchedule(meal, day)}
+                                onClick={() => removeFromSchedule(meal, day)}
                             />
                         </Tooltip>
                     </Box>
                 </Box>
             </Flex>
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal
+                initialFocusRef={initialRef}
+                isOpen={isOpen}
+                onClose={onClose}
+            >
                 <ModalOverlay bg={"none"} />
                 <ModalContent height={500}>
                     <ModalHeader>Recipe finder</ModalHeader>
@@ -109,6 +110,7 @@ const MealScheduleItem: React.FC<IProps> = ({
                     <ModalBody textAlign={"center"}>
                         <Box>
                             <CreatableSelect
+                                ref={initialRef}
                                 value={selected}
                                 onChange={handleChange}
                                 options={optionsList}
@@ -120,7 +122,7 @@ const MealScheduleItem: React.FC<IProps> = ({
                         <Button
                             colorScheme="blue"
                             mr={3}
-                            onClick={(e) => {
+                            onClick={() => {
                                 addToSchedule(selected.value, meal, day);
                                 onClose();
                             }}

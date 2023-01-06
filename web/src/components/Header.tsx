@@ -18,13 +18,18 @@ const Header: React.FC<IProps> = ({ recipes }) => {
             justifyContent={"space-between"}
         >
             {" "}
-            <Link  _hover={{ textDecoration: 'none',  }} to="/" as={RouterLink}>
+            <Link _hover={{ textDecoration: "none" }} to="/" as={RouterLink}>
                 <Heading pl={10} minHeight={20} p={3}>
                     <Text>Dušan's amazing kitchen</Text>
                 </Heading>
             </Link>
             <Flex alignItems={"center"} justifyContent={"space-between"}>
-                <Link _hover={{ textDecoration: 'none',  }} m={5} to="/meal-schedule" as={RouterLink}>
+                <Link
+                    _hover={{ textDecoration: "none" }}
+                    m={5}
+                    to="/meal-schedule"
+                    as={RouterLink}
+                >
                     Meal Schedule
                 </Link>
                 <SearchBar recipes={recipes} />

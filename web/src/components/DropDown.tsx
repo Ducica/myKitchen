@@ -21,7 +21,7 @@ interface IProps {
 
 const DropDown: React.FC<IProps> = ({ menuList, menuName, applyFilter }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const {getCheckboxProps, setValue } = useCheckboxGroup({
+    const { getCheckboxProps, setValue } = useCheckboxGroup({
         onChange: (selectedValues: (string | number)[]) => {
             const checkBoxState = selectedValues as string[];
             applyFilter(menuName, checkBoxState);
@@ -40,7 +40,7 @@ const DropDown: React.FC<IProps> = ({ menuList, menuName, applyFilter }) => {
                     _hover={{ bg: "beige" }}
                     aria-label="Courses"
                     fontWeight="normal"
-                    onMouseEnter={ onOpen}
+                    onMouseEnter={onOpen}
                     onMouseLeave={onClose}
                 >
                     {menuName}{" "}
@@ -71,4 +71,3 @@ const DropDown: React.FC<IProps> = ({ menuList, menuName, applyFilter }) => {
     );
 };
 export default DropDown;
-

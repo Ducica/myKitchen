@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
     Box,
     Button,
@@ -23,12 +23,12 @@ interface IProps {
 }
 
 const SearchBar: React.FC<IProps> = ({ recipes }) => {
-
+    const initialRef = useRef(null);
     const { isOpen, onOpen, onClose } = useDisclosure();
-     const onModalClose=()=>{
-        setSearchTerm('')
-        onClose()
-    }
+    const onModalClose = () => {
+        setSearchTerm("");
+        onClose();
+    };
     const [searchTerm, setSearchTerm] = useState("");
     const optionsList = recipes
         .filter((recipe: IRecipe) =>
@@ -38,25 +38,29 @@ const SearchBar: React.FC<IProps> = ({ recipes }) => {
         )
         .map((recipe: IRecipe) => (
             <ListItem
-                _hover={{ backgroundColor: "gray.100",  }}
+                _hover={{ backgroundColor: "gray.100" }}
                 listStyleType={"none"}
-                onClick={() => {setSearchTerm(""); onClose()}}
+                onClick={() => {
+                    setSearchTerm("");
+                    onClose();
+                }}
                 key={recipe.idMeal}
-
-                border={'solid'}
+                border={"solid"}
                 minH={8}
-             mt={2}
+                mt={2}
                 borderRadius={5}
-
-
             >
-                <Link display={'block'} to={`/recipes/${recipe.idMeal}`} as={RouterLink}>
+                <Link
+                    display={"block"}
+                    to={`/recipes/${recipe.idMeal}`}
+                    as={RouterLink}
+                >
                     {recipe.strMeal}
                 </Link>
             </ListItem>
         ));
     return (
-        <Box textAlign={'center'}>
+        <Box textAlign={"center"}>
             <Input
                 width={350}
                 placeholder={"Look for recipes"}
@@ -69,16 +73,21 @@ const SearchBar: React.FC<IProps> = ({ recipes }) => {
                 onClick={onOpen}
             />
 
-            <Modal isOpen={isOpen} onClose={onModalClose}>
+            <Modal
+                initialFocusRef={initialRef}
+                isOpen={isOpen}
+                onClose={onModalClose}
+            >
                 <ModalOverlay />
                 <ModalContent height={500}>
                     <ModalHeader>Recipe finder</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody textAlign={'center'}>
+                    <ModalBody textAlign={"center"}>
                         <Box>
                             <Input
-                            ml={-4}
-                                textAlign={'center'}
+                                ref={initialRef}
+                                ml={-4}
+                                textAlign={"center"}
                                 width={350}
                                 placeholder={"Look for recipes"}
                                 type={"text"}
@@ -90,12 +99,9 @@ const SearchBar: React.FC<IProps> = ({ recipes }) => {
                             />
                             {searchTerm && searchTerm.length > 1 && (
                                 <UnorderedList
-                                width={350}
-
+                                    width={350}
                                     height={200}
                                     overflow={"auto"}
-
-
                                 >
                                     {optionsList}
                                 </UnorderedList>
@@ -107,7 +113,6 @@ const SearchBar: React.FC<IProps> = ({ recipes }) => {
                         <Button colorScheme="blue" mr={3} onClick={onClose}>
                             Close
                         </Button>
-
                     </ModalFooter>
                 </ModalContent>
             </Modal>
